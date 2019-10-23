@@ -54,6 +54,8 @@ def upload(sourceFile, destinationFolder, wipeFolder = false) {
         downloadLink = ""
     }
 
+    downloadLink = downloadLink.replaceFirst(/\?dl=0$/, "?dl=1")
+
     return downloadLink;
 }
 
