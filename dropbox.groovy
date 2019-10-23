@@ -23,7 +23,7 @@ def upload(sourceFile, destinationFolder, wipeFolder = false) {
 
     def db_cmd = "${env.DROPBOX_UPLOADER_PATH}/dropbox_uploader.sh -q -t \"${env.DROPBOX_ACCESSTOKEN}\"";
 
-    def baseSourceName = downloadLink = sh (script: "basename ${sourceFile}", returnStdout: true).trim()
+    def baseSourceName = sh (script: "basename ${sourceFile}", returnStdout: true).trim()
 
     if( wipeFolder ) {
         // make sure we have no macOS build folder on DropBox...
@@ -46,10 +46,10 @@ def upload(sourceFile, destinationFolder, wipeFolder = false) {
     }
 
     try {
-        sh "${db_cmd} upload \"${sourceFile}\" \"${env.DROPBOX_DEST_FOLDER}/${baseSourceName}\""
-        downloadLink = sh (script: "${db_cmd} share \"${env.DROPBOX_DEST_FOLDER}/${baseSourceName}\"", returnStdout: true).trim()
+        sh "${db_cmd} upload \"${sourceFile}\" \"${destinationFolder}/${baseSourceName}\""
+        downloadLink = sh (script: "${db_cmd} share \"${destinationFolder}/${baseSourceName}\"", returnStdout: true).trim()
     } catch (err) {
-        echo "ERROR: Dropbox uploader could not upload ${sourceFile} build to dropbox:/${env.DROPBOX_DEST_FOLDER}/baseSourceName and create a share link."
+        echo "ERROR: Dropbox uploader could not upload ${sourceFile} build to dropbox:/${destinationFolder}/${baseSourceName} and create a share link."
         downloadLink = ""
     }
 
