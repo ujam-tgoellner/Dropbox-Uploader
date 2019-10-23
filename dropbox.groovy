@@ -46,10 +46,10 @@ def upload(sourceFile, destinationFolder, wipeFolder = false) {
     }
 
     try {
-        sh "${db_cmd} upload \"${sourceFile}\" \"${env.DROPBOX_DEST_FOLDER}/${sourceFile}\""
-        downloadLink = sh (script: "${db_cmd} share \"${env.DROPBOX_DEST_FOLDER}/${sourceFile}\"", returnStdout: true).trim()
+        sh "${db_cmd} upload \"${sourceFile}\" \"${env.DROPBOX_DEST_FOLDER}/${baseSourceName}\""
+        downloadLink = sh (script: "${db_cmd} share \"${env.DROPBOX_DEST_FOLDER}/${baseSourceName}\"", returnStdout: true).trim()
     } catch (err) {
-        echo "ERROR: Dropbox uploader could not upload ${sourceFile} build to dropbox:/${env.DROPBOX_DEST_FOLDER} and create a share link."
+        echo "ERROR: Dropbox uploader could not upload ${sourceFile} build to dropbox:/${env.DROPBOX_DEST_FOLDER}/baseSourceName and create a share link."
         downloadLink = ""
     }
 
