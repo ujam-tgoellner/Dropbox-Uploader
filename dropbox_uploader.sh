@@ -87,11 +87,15 @@ if [[ ! -d "$TMP_DIR" ]]; then
 fi
 
 #Look for optional config file parameter
-while getopts ":qpskdhf:x:" opt; do
+while getopts ":qpskdhf:x:t:" opt; do
     case $opt in
 
     f)
       CONFIG_FILE=$OPTARG
+    ;;
+
+    t)
+      OAUTH_ACCESS_TOKEN=$OPTARG
     ;;
 
     d)
@@ -1507,7 +1511,6 @@ function db_sha_local
 ################
 #### SETUP  ####
 ################
-
 if [[ -e $OAUTH_ACCESS_TOKEN ]]; then
 
     #CHECKING FOR AUTH FILE
