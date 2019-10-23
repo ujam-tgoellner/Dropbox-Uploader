@@ -55,3 +55,5 @@ def upload(sourceFile, destinationFolder, wipeFolder = false) {
 
     return downloadLink;
 }
+
+return this;
